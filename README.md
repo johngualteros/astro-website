@@ -1,10 +1,8 @@
 # Results
 
 Result with desktop view
-```
 ![](./public/result_desktop.png)
 Result with mobile view
-```
 ![](./public/result_mobile.png)
 # Welcome to [Astro](https://astro.build)
 
