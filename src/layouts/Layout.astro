@@ -1,0 +1,44 @@
+---
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props as Props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+<style lang="scss">
+	@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700&display=swap');
+	// Variables
+	$almostWhite: hsl(0, 0%, 98%);
+	$mediumGray: hsl(0, 0%, 41%);
+	$almostBlack: hsl(0, 0%, 8%);
+	$size:18px;
+
+	@mixin reset-pm{
+		padding: 0;
+		margin: 0;
+	}
+	html{
+		background-color: $almostWhite;
+		color: $almostBlack;
+		font-family: 'Epilogue', sans-serif;
+		font-size: $size;
+		overflow: hidden;
+	}
+	body{
+		@include reset-pm;
+		overflow:hidden ;
+	}
+</style>

@@ -1,0 +1,261 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="snap">
+	<header>
+		<nav id="nav" class="nav">
+			<h1>snap</h1>
+			<ul>
+				<li>
+					<a href="#">Features</a>
+				</li>
+				<li>
+					<a href="#">Company</a>
+				</li>
+				<li>
+					<a href="#">Careers</a>
+				</li>
+				<li>
+					<a href="#">About</a>
+				</li>
+				<li>
+					<button class="btn-login">Login</button>
+				</li>
+				<li>
+					<button class="btn-register">Register</button>
+				</li>
+			</ul>
+			<a href="#nav" class="nav_hamburguer nav_icon">
+				<img src="../../public/images/icon-menu.svg" alt="">
+			</a>
+			<a href="#" class="nav_close nav_icon">
+				<img src="../../public/images/icon-close-menu.svg" alt="">
+			</a>
+		</nav>
+	</header>
+	<div class="content">
+		<div class="container"></div>
+		<div class="text">
+			<h1>Make Remote Work</h1>
+			<p>Get your team async, no matter your loaction streamline processes,create team rituals,and watch
+				productivity soar.</p>
+			<button class="button_home">Learn More</button>
+
+			<div class="icons_container">
+				<img src="../../public/images/client-databiz.svg" alt="">
+				<img src="../../public/images/client-audiophile.svg" alt="">
+				<img src="../../public/images/client-meet.svg" alt="">
+				<img src="../../public/images/client-maker.svg" alt="">
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style lang="scss">
+	$almostWhite: hsl(0, 0%, 98%);
+	$mediumGray: hsl(0, 0%, 41%);
+	$almostBlack: hsl(0, 0%, 8%);
+	$size: 18px;
+
+	@function sizing($value) {
+		@return $value * $size;
+	}
+
+	@mixin btn($backgroundColor, $color, $border) {
+		background-color: $backgroundColor;
+		color: $color;
+		padding: 5px 30px;
+		border-radius: 7px;
+		transition: all 0.3s ease-in-out;
+		border: none;
+		font-size: $size;
+
+		@if($border=='true') {
+			border: 1px solid $mediumGray;
+		}
+
+		&:hover {
+			cursor: pointer;
+			transition: all 0.3s ease-in-out;
+		}
+	}
+
+	header {
+		overflow: hidden;
+	}
+
+	.nav {
+		--state-close: scale(0);
+		--state-hamburguer: scale(1);
+		--state-menu: 0;
+		padding: 0 5px;
+		display: grid;
+		grid-template-columns: repeat(2, max-content);
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.nav:target {
+		--state-close: scale(1);
+		--state-hamburguer: scale(0);
+		--state-menu: opacity(1);
+	}
+
+	.nav_hamburguer,
+	.nav_close {
+		cursor: pointer;
+		grid-column: -2/-1;
+		grid-row: 1/2;
+		transition: .2s ease-in-out;
+	}
+
+	.nav_hamburguer {
+		transform: var(--state-hamburguer);
+	}
+
+	.nav_close {
+		transform: var(--state-close);
+	}
+
+	.nav_icon {
+		width: 40px;
+	}
+
+	ul {
+		background-color: $almostWhite;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 70%;
+		margin: 0;
+
+		display: grid;
+		gap: -50px;
+		padding: 25% 1%;
+
+		opacity: var(--state-menu);
+		transition: all 0.3s ease-in-out;
+
+		li {
+			margin-left: 10px;
+			list-style: none;
+
+			a {
+				color: $mediumGray;
+				text-decoration: none;
+				font-size: $size;
+			}
+		}
+	}
+
+	.btn-login {
+		@include btn(transparent, $mediumGray, 'false');
+	}
+
+	.btn-register {
+		@include btn(transparent, $mediumGray, 'true');
+	}
+
+	.container {
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		background-image: url("../../public/images/image-hero-mobile.png");
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		background-color: $almostWhite;
+		height: 40vh;
+	}
+
+	.content {
+		width: 100%;
+		height: auto;
+		text-align: center;
+
+		h1 {
+			font-size: sizing(1.5);
+		}
+
+		p {
+			font-size: 14px;
+			color: $mediumGray;
+			line-height: 25px;
+		}
+
+		.icons_container {
+			padding: 20px 0px;
+			width: 90%;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+
+			img {
+				width: 50px;
+			}
+		}
+	}
+
+	.button_home {
+		@include btn($almostBlack, $almostWhite, 'false');
+		padding: 10px 15px;
+		border-radius: 10px;
+	}
+
+	@media(min-width:768px) {
+		.content {
+			display: grid;
+			grid-template-areas: 'text imagen';
+			grid-template-columns: auto 50%;
+			height: 100vh;
+
+			.text {
+				grid-area: text;
+				text-align: left;
+				padding: 7%;
+
+				h1 {
+					font-size: sizing(4);
+				}
+
+				p {
+					font-size: sizing(1.3);
+				}
+			}
+
+			.container {
+				grid-area: imagen;
+				background-image: url("../../public/images/image-hero-desktop.png");
+				height: 100vh;
+			}
+		}
+
+		.nav {
+			--state-hamburguer: scale(0);
+			grid-template-columns:repeat(2, max-content);
+			ul {
+				background-color: unset;
+				position: unset;
+				width: 100%;
+				display: grid;
+				padding: 0;
+				grid-auto-flow: column;
+				opacity: 1;
+				grid-column:-2/-1;
+				grid-row: 1/2;
+				align-items: center;
+				li{
+					margin: 0 20px;
+					a{
+						font-size: 14px;
+						color: $mediumGray;
+						&:hover{
+							color:$almostBlack;
+						}
+					}
+				}
+			}
+		}
+	}
+</style>
